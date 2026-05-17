@@ -47,6 +47,26 @@
     <!-- template styles -->
     <link rel="stylesheet" href="assets/css/zefxa.css" />
     <link rel="stylesheet" href="assets/css/zefxa-responsive.css" />
+    <style>
+        .contact-one__input-box .nice-select .list {
+            background-color: #1c2033 !important; /* Color oscuro sólido para el fondo del menú */
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            z-index: 999 !important; /* Capa por encima de textos e imágenes flotantes */
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5) !important; /* Sombra para darle profundidad */
+        }
+        .contact-one__input-box .nice-select .option {
+            color: #ffffff !important; /* Texto blanco para lectura clara */
+            line-height: 40px !important;
+            min-height: 40px !important;
+            padding-left: 18px !important;
+        }
+        .contact-one__input-box .nice-select .option:hover, 
+        .contact-one__input-box .nice-select .option.focus, 
+        .contact-one__input-box .nice-select .option.selected.focus {
+            background-color: #2a304d !important; /* Color de realce al pasar el cursor (hover) */
+            color: #ffffff !important;
+        }
+    </style>
 </head>
 
 <body class="custom-cursor">
@@ -503,54 +523,57 @@
                                 <img src="assets/images/shapes/contact-one-form-shape-1.png" alt="">
                             </div>
                            <form class="contact-form-validated contact-one__form" action="https://formspree.io/f/xkoenjwo" method="post" novalidate="novalidate">
-    <div class="row">
-        <div class="col-xl-12">
-            <div class="contact-one__input-box">
-                <input type="text" name="username" placeholder="Tu Nombre" required="">
-                <div class="contact-one__input-box-icon">
-                    <span class="icon-people"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-12">
-            <div class="contact-one__input-box">
-                <input type="email" name="email" placeholder="Correo Electrónico" required="">
-                <div class="contact-one__input-box-icon">
-                    <span class="icon-open-mail"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-12">
-            <div class="contact-one__input-box">
-                <input type="text" name="phone" placeholder="Número de Teléfono" required="">
-                <div class="contact-one__input-box-icon">
-                    <span class="icon-phone-call"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-12">
-            <div class="contact-one__input-box">
-                <div class="contact-one__input-box-icon">
-                    <span class="icon-edit"></span>
-                </div>
-                <div class="select-box">
-                    <select class="wide" name="service" required="">
-                        <option value="" data-display="Seleccionar Servicio">Servicio de Interés</option>
-                        <option value="Páginas Informativas">Páginas Informativas</option>
-                        <option value="E-commerce / Tiendas Online">E-commerce / Tiendas Online</option>
-                        <option value="Sistemas Web / Administrativos">Sistemas Web / Administrativos</option>
-                        <option value="Soporte y Mantenimiento Diario">Soporte y Mantenimiento Diario</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-12">
-            <div class="contact-one__btn-box">
-                <button type="submit" class="thm-btn contact-one__btn">Solicitar Cotización</button>
-            </div>
-        </div>
-    </div>
-</form>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="contact-one__input-box">
+                                            <input type="text" name="username" placeholder="Tu Nombre" required="">
+                                            <div class="contact-one__input-box-icon">
+                                                <span class="icon-people"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <div class="contact-one__input-box">
+                                            <input type="email" name="email" placeholder="Correo Electrónico" required="">
+                                            <div class="contact-one__input-box-icon">
+                                                <span class="icon-open-mail"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <div class="contact-one__input-box">
+                                            <input type="text" name="phone" placeholder="Número de Teléfono" required="">
+                                            <div class="contact-one__input-box-icon">
+                                                <span class="icon-phone-call"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        
+
+                                        <div class="contact-one__input-box">
+                                            <div class="contact-one__input-box-icon">
+                                                <span class="icon-edit"></span>
+                                            </div>
+                                            <div class="select-box">
+                                                <select class="wide" name="service" required="">
+                                                    <option value="" data-display="Seleccionar Servicio">Servicio de Interés</option>
+                                                    <option value="Páginas Informativas">Páginas Informativas</option>
+                                                    <option value="E-commerce / Tiendas Online">E-commerce / Tiendas Online</option>
+                                                    <option value="Sistemas Web / Administrativos">Sistemas Web / Administrativos</option>
+                                                    <option value="Soporte y Mantenimiento Diario">Soporte y Mantenimiento Diario</option>
+                                                    <option value="Otro">Otro</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <div class="contact-one__btn-box">
+                                            <button type="submit" class="thm-btn contact-one__btn">Solicitar Cotización</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                             <div class="result"></div>
                         </div>
                     </div>
