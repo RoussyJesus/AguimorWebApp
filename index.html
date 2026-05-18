@@ -517,12 +517,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-4 col-lg-5">
-                        <div class="contact-one__left wow slideInLeft" data-wow-delay="100ms"
-                            data-wow-duration="2500ms">
+                        <div class="contact-one__left wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
                             <div class="contact-one__from-shape-1">
                                 <img src="assets/images/shapes/contact-one-form-shape-1.png" alt="">
                             </div>
-                           <form class="contact-form-validated contact-one__form" action="https://formspree.io/f/xkoenjwo" method="post" novalidate="novalidate">
+                            
+                            <form id="aguimor-cotizar-form" class="contact-one__form" action="https://formspree.io/f/xkoenjwo" method="post">
                                 <div class="row">
                                     <div class="col-xl-12">
                                         <div class="contact-one__input-box">
@@ -549,8 +549,6 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
-                                        
-
                                         <div class="contact-one__input-box">
                                             <div class="contact-one__input-box-icon">
                                                 <span class="icon-edit"></span>
@@ -574,9 +572,10 @@
                                     </div>
                                 </div>
                             </form>
-                            <div class="result"></div>
-                        </div>
-                    </div>
+                
+                <div class="result" style="margin-top: 15px;"></div>
+            </div>
+        </div>
                     <div class="col-xl-8 col-lg-7">
                         <div class="contact-one__right">
                             <div class="contact-one__video-link wow zoomIn" data-wow-delay="100ms"
@@ -1231,6 +1230,79 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const formulario = document.getElementById("aguimor-cotizar-form");
+    const contenedorResultado = document.querySelector(".result");
+
+    if (formulario) {
+        formulario.addEventListener("submit", function (e) {
+            e.preventDefault(); // Detener el comportamiento de recarga nativo
+
+            // Validar que se haya seleccionado un servicio real
+            const selectServicio = formulario.querySelector('select[name="service"]');
+            if (selectServicio && selectServicio.value === "") {
+                contenedorResultado.innerHTML = `<p style="color: #ff4d4d; font-weight: 600; margin: 0;"><i class="fas fa-exclamation-circle"></i> Por favor, selecciona un servicio de interés.</p>`;
+                return;
+            }
+
+            // Cambiar el estado del botón para indicar que se está procesando
+            const boton = formulario.querySelector("button[type='submit']");
+            const textoOriginalBoton = boton.innerHTML;
+            boton.innerText = "Enviando...";
+            boton.disabled = true;
+
+            // Recopilar la información ingresada por el usuario
+            const datos = new FormData(formulario);
+
+            // Enviar la petición asíncrona hacia Formspree
+            fetch(formulario.action, {
+                method: formulario.method,
+                body: datos,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                boton.innerHTML = textoOriginalBoton;
+                boton.disabled = false;
+
+                if (response.ok) {
+                    // Mensaje de éxito estilizado en verde brillante/cyan integrado con la estética
+                    contenedorResultado.innerHTML = `
+                        <div style="background-color: rgba(20, 181, 166, 0.1); border: 1px solid #14b5a6; padding: 15px; border-radius: 5px; margin-top: 10px;">
+                            <p style="color: #14b5a6; font-weight: 700; margin: 0; font-size: 15px;">
+                                <i class="fas fa-check-circle" style="margin-right: 6px;"></i> ¡Solicitud enviada con éxito!
+                            </p>
+                            <p style="color: #ffffff; opacity: 0.8; margin: 5px 0 0 0; font-size: 13px;">
+                                Nos pondremos en contacto contigo en la brevedad posible.
+                            </p>
+                        </div>
+                    `;
+                    formulario.reset(); // Limpiar campos del formulario
+                    
+                    // Si usas NiceSelect, actualizamos la vista gráfica del dropdown al estado inicial
+                    if (typeof jQuery !== 'undefined' && jQuery.fn.niceSelect) {
+                        jQuery(selectServicio).niceSelect('update');
+                    }
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            contenedorResultado.innerHTML = `<p style="color: #ff4d4d; margin: 0;">${data['errors'].map(error => error['message']).join(', ')}</p>`;
+                        } else {
+                            contenedorResultado.innerHTML = `<p style="color: #ff4d4d; margin: 0;"><i class="fas fa-times-circle"></i> Ocurrió un problema al procesar el envío.</p>`;
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                boton.innerHTML = textoOriginalBoton;
+                boton.disabled = false;
+                contenedorResultado.innerHTML = `<p style="color: #ff4d4d; margin: 0;"><i class="fas fa-wifi"></i> Error de conexión. Inténtalo de nuevo más tarde.</p>`;
+            });
+        });
+    }
 });
 </script>
 <!-- Mirrored from weblayout.mnsithub.com/php/webplateone/zefxa/index.php by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 17 May 2026 20:14:51 GMT -->
